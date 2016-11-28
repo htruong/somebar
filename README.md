@@ -6,11 +6,15 @@ Introducing StripBar - Simple indicator for NeoPixel on Arduino inspired by [Any
 
 It is cross platform too, Tested on Ubuntu 14.10 and Mac OS 10.10. Should work on Windows, too.
 
-## Install
+## Hardware
 
-```sh
-sudo python setup.py install
-```
+- Arduino or Arduino Pro Micro 5V 16Mhz, I particularly love the Pro Micro because of its size, but you can use whatever. Get it on SparkFun https://www.sparkfun.com/products/12640 or eBay.
+
+- Adafruits NeoPixel RGB LED strips https://www.adafruit.com/product/1138 - you can also get it cheap on eBay or AliExpress.
+
+- A 1000uF-capacitor.
+
+Hook them up as described: https://learn.adafruit.com/adafruit-neopixel-uberguide/basic-connections
 
 ## Program your Arduino
 
@@ -25,6 +29,12 @@ sudo adduser ${USER} dialout
 ```
 
 Mac systems seem to have set this right out of the box, so no worries.
+
+## Install stripbar
+
+```sh
+sudo python setup.py install
+```
 
 ## Usage
 
