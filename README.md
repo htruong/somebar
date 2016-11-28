@@ -14,6 +14,16 @@ pip3 install stripbar
 
 Hook up the LED strip to the Arduino and compile & upload the .ino file in the Arduino folder. Change the pin name and number of LEDs as needed.
 
+## Set correct permission for serial device
+
+On Ubuntu and other Linux distributions you might need to set the correct permission for the Arduino device. Simply add your current user to the `dialout` group:
+
+```sh
+sudo adduser ${USER} dialout
+```
+
+Mac systems seem to have set this right out of the box, so no worries.
+
 ## Usage
 
 to run stripbar just execute in console
