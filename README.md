@@ -16,7 +16,7 @@ Hook up the LED strip to the Arduino and compile & upload the .ino file in the A
 
 ## Set correct permission for serial device
 
-On Ubuntu and other Linux distributions you might need to set the correct permission for the Arduino device. Simply add your current user to the `dialout` group:
+On Ubuntu and other Linux distributions you might need to set the correct permission for the Arduino device. Simply add your current user to the `dialout` group, then log out and log back in again:
 
 ```sh
 sudo adduser ${USER} dialout

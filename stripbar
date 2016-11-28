@@ -58,8 +58,8 @@ class StripBarServer(asyncore.dispatcher):
 			print 'Quitting man'
 			self.indicator.reset()
 			sys.exit()
-
-		self.indicator.set_icon(self.port_offset, s)
+		else:
+			self.indicator.set_icon(self.port_offset, s)
 		self.busy_talking = 0
 
 	def writable(self):
