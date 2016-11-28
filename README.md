@@ -7,7 +7,7 @@ Tested on Ubuntu 14.10 and Mac OS 10.10
 ## Install
 
 ```sh
-pip3 install stripbar
+sudo python setup.py install
 ```
 
 ## Program your Arduino
