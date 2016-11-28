@@ -3,6 +3,8 @@
 import socket
 import argparse
 import serial
+import sys
+import asyncore
 import webcolors
 from time import sleep
 
@@ -22,25 +24,46 @@ class Indicator:
 		try:
 			col = webcolors.name_to_rgb(name)
 		except ValueError:
-			print ' WTF is', name, '?'
+			print 'WTF is', name, '?'
 		
 		to_write = '{ledidx} {rval} {gval} {bval}'.format(
 			ledidx = idx, 
 			rval=int(col[0]) * self.brightness / 100, 
 			gval=int(col[1]) * self.brightness / 100, 
 			bval=int(col[2]) * self.brightness / 100 )
-		
-		self.ser.write(to_write + '\n')
+
+		if self.ser:
+			self.ser.write(to_write + '\n')
 
 		print 'Just sent ', to_write
 
 	def set_brightness(self, lvl):
 		self.brightness = lvl
 
+class StripBarServer(asyncore.dispatcher):
+	def __init__(self, host, port, port_offset, indicator):
+		asyncore.dispatcher.__init__(self)
+		self.create_socket(socket.AF_INET, socket.SOCK_DGRAM)
+		#self.set_reuse_addr()
+		self.bind((host, port+port_offset))
+		#self.listen(5)
+		self.indicator = indicator
+		self.port_offset = port_offset
+		self.busy_talking = 0
+
+	def handle_read(self):
+		s = self.recv(20)
+		self.busy_talking = 1
+		self.indicator.set_icon(self.port_offset, s)
+		self.busy_talking = 0
+
+	def writable(self):
+		return bool(self.busy_talking)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--port', help='Port number', type=int, default=1738)
 parser.add_argument('-s', '--serialdev', help='Serial device', default='/dev/ttyUSB0')
+parser.add_argument('-d', '--dummyserial', help='Dummy serial device', type=int, default=0)
 parser.add_argument('-b', '--baud', help='Baud rate', type=int, default=9600)
 parser.add_argument('-l', '--brightness', help='Brightness', type=int, default=100)
 parser.add_argument('-n', '--numleds', help='Number of LEDs', type=int, default=1)
@@ -52,66 +75,36 @@ SERDEV = parsed_args.serialdev
 BAUD = parsed_args.baud
 BRIGHTNESS = parsed_args.brightness
 NUMLEDS = parsed_args.numleds
-
-# Datagram (udp) socket
-allsocks = [];
-
-for sock_num in range(NUMLEDS):
-	try :
-		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-		print 'Socket on port created'
-	except socket.error, msg :
-		print 'Failed to create socket. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
-		sys.exit()
-
-	# Bind socket to local host and port
-	try:
-		s.bind((HOST, PORT + sock_num))
-	except socket.error , msg:
-		print 'Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
-		sys.exit()
-	
-	s.setblocking(0)
-
-	print 'Socket bind on port', PORT + sock_num, 'complete'
-	allsocks.append(s)
-
-print 'All sockets are set up'
-
-ser = serial.Serial(SERDEV, BAUD, timeout=1)
+DUMMYSERIAL = parsed_args.dummyserial
 
 
+# Setup serial device
+ser = None
+if DUMMYSERIAL == 0:
+	ser = serial.Serial(SERDEV, BAUD, timeout=1)
+
+
+# Setup the indicator
 indicator = Indicator('root', ser, NUMLEDS)
 indicator.set_brightness(BRIGHTNESS)
 indicator.reset()
 
 print 'Opened serial device'
 
-#now keep talking with the client
-while 1:
-	for sock_num in range(len(allsocks)):
-		s = allsocks[sock_num]
-		# receive data from client (data, addr)
-		d = ''
-		try:
-			d = s.recvfrom(100)
-		except socket.error:
-			continue
-
-		data = d[0]
-		addr = d[1]
-
-		if not data: 
-			continue
-
-		reply = 'OK...' + data
-		 
-		print 'Message[' + addr[0] + ':' + str(addr[1]) + '] - ' + data.strip()
-		indicator.set_icon(sock_num, data.strip())
-		sleep(0.1)
+# Datagram (udp) socket
+allsocks = [];
 
 
+for sock_num in range(NUMLEDS):
+	try :
+		s = StripBarServer(HOST, PORT, sock_num, indicator)
+	except socket.error, msg :
+		print 'Failed to create socket. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
+		sys.exit()
 
-for sock_num in range(len(allsocks)):
-	s = allsocks[sock_num]
-	s.close()
+	print 'Socket bind on port', PORT + sock_num, 'complete'
+	allsocks.append(s)
+
+print 'All sockets are set up'
+
+asyncore.loop()
