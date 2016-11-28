@@ -1,12 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Comment=Simple taskbar indicator
-Exec=somebar
-GenericName[en_US]=somebar
-GenericName=somebar
-Icon=somebar
-Name[en_US]=somebar
-Name=somebar
+Exec=stripbar
+GenericName[en_US]=stripbar
+GenericName=stripbar
+Icon=stripbar
+Name[en_US]=stripbar
+Name=stripbar
 Categories=Development;
 StartupNotify=false
 Terminal=false

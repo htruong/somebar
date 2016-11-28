@@ -1,7 +1,5 @@
-include somebar
+include stripbar
 include README.md
 include LICENSE
-include somebar.xpm
-include somebar.desktop
-recursive-include somebar_icons *.png
-recursive-include somebar_icons *.py
+include stripbar.xpm
+include stripbar.desktop

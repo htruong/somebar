@@ -1,57 +1,43 @@
-# SomeBar
+# StripBar
 
-Simple taskbar indicator for Unity inspired by [AnyBar](https://github.com/tonsky/AnyBar) (basically it is a clone of AnyBar)
+Simple indicator for NeoPixel on Arduino inspired by [AnyBar](https://github.com/tonsky/AnyBar) (basically it is a clone of AnyBar)
 
-Tested on Ubuntu 14.04
-
-<img src="screenshot.png?raw=true" />
+Tested on Ubuntu 14.10 and Mac OS 10.10
 
 ## Install
 
 ```sh
-pip3 install somebar
+pip3 install stripbar
 ```
+
+## Program your Arduino
+
+Hook up the LED strip to the Arduino and compile & upload the .ino file in the Arduino folder. Change the pin name and number of LEDs as needed.
 
 ## Usage
 
-to run somebar just execute in console
+to run stripbar just execute in console
 ```sh
-somebar
+stripbar --serialdev /dev/ttyACM0 --numleds 9
 ```
 
-somebar is controlled via UDP port (1738 by default). Send it a message and it will change a color:
+You can set the brightness for the LED strip as well as the number of LEDs.
+
+For all options try
 
 ```sh
-echo -n "black" | nc -4u -w0 localhost 1738
+stripbar -h
 ```
 
-Following commands change color:
+stripbar is controlled via UDP port (1738 by default). Send it a message and it will change a color:
 
+```sh
+echo -n "red" | nc -4u -w0 localhost 1738
+```
 
-<img src="somebar_icons/white@2x.png?raw=true" width=19 /> `white`
-<img src="somebar_icons/red@2x.png?raw=true" width=19 /> `red`
-<img src="somebar_icons/orange@2x.png?raw=true" width=19 /> `orange`
-<img src="somebar_icons/yellow@2x.png?raw=true" width=19 /> `yellow`
-<img src="somebar_icons/green@2x.png?raw=true" width=19 /> `green`
-<img src="somebar_icons/cyan@2x.png?raw=true" width=19 /> `cyan`
-<img src="somebar_icons/blue@2x.png?raw=true" width=19 /> `blue`
-<img src="somebar_icons/purple@2x.png?raw=true" width=19 /> `purple`
-<img src="somebar_icons/black@2x.png?raw=true" width=19 /> `black`
-<img src="somebar_icons/question@2x.png?raw=true" width=19 /> `question`
-<img src="somebar_icons/exclamation@2x.png?raw=true" width=19 /> `exclamation`
+Any color recognized by a webbrowser will work.
+
+If you have more than one LED, all the sockets will start listening from the base port (1738) and offset from there. 
 
 And one special command forces somebar to quit: `quit`
 
-## Running multiple instances
-
-You can run several instances of somebar as long as they listen on different ports. Use `-p` or `--port` command line argument to change port:
-
-```sh
-somebar -p 1738
-somebar -p 1739
-somebar -p 1740
-```
-
-## Custom images
-
-somebar can use user-local images if you put them under `~/.somebar` or `~/.AnyBar`. E.g. if you have `~/.AnyBar/square@2x.png` present, send `square` to 1738 and it will be displayed.

@@ -54,6 +54,11 @@ class StripBarServer(asyncore.dispatcher):
 	def handle_read(self):
 		s = self.recv(20)
 		self.busy_talking = 1
+		if s == "quit":
+			print 'Quitting man'
+			self.indicator.reset()
+			sys.exit()
+
 		self.indicator.set_icon(self.port_offset, s)
 		self.busy_talking = 0
 
