@@ -23,7 +23,7 @@ setup(
     author = 'Huan Truong',
     author_email = 'htruong@tnhh.net',
     url = 'https://github.com/htruong/stripbar',
-    download_url  ='https://github.com/limpbrains/stripbar/tarball/0.0.1',
+    download_url  ='https://github.com/limpbrains/stripbar/tarball/0.0.95',
     keywords = ['AnyBar', 'stripbar', 'taskbar', 'indicator'],
     packages = find_packages(),
     classifiers = [
