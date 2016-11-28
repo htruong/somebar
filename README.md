@@ -1,18 +1,21 @@
-# StripBar: IoT LED Strip realization of AnyBar
+# Stripbar: IoT LED Strip realization of AnyBar
 
 You want simple, beautiful LEDs on your desk so you can focus on the right work, instead of looking at the dreadful LCD screen? You want IoT in this smart-everything era? Look no more.
 
-Introducing StripBar - Simple indicator for NeoPixel on Arduino inspired by [AnyBar](https://github.com/tonsky/AnyBar) (basically it is a clone of AnyBar)
+Introducing Stripbar - Simple indicator for NeoPixel on Arduino inspired by [AnyBar](https://github.com/tonsky/AnyBar).
 
-It is cross platform too, Tested on Ubuntu 14.10 and Mac OS 10.10. Should work on Windows, too.
 
 ## Compability
 
-As far as I know, this is the real deal, when it comes to color. You can tell it to display any color, unlike Anybar.
+- Unlike competitors such as AnyBar or somebar, stripbar is cross platform. Tested on Ubuntu 14.10 and Mac OS 10.10. Should work on Windows, too.
+
+- 100% protocol-level compatibility with AnyBar, or your money back!
+
+- As far as I am concerned, this is the real deal, when it comes to color. You can tell it to display any color, unlike AnyBar.
 
 ## Hardware
 
-- Arduino or Arduino Pro Micro 5V 16Mhz, I particularly love the Pro Micro because of its size, but you can use whatever. Get it on SparkFun https://www.sparkfun.com/products/12640 or eBay.
+- Arduino or Arduino Pro Micro 5V 16Mhz, I particularly love the Pro Micro because of its size, but you can use whatever. Get it on SparkFun https://www.sparkfun.com/products/12640 or eBay. The $5 version of the Pro Micro works just fine.
 
 - Adafruits NeoPixel RGB LED strips https://www.adafruit.com/product/1138 - you can also get it cheap on eBay or AliExpress.
 
