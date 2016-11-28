@@ -1,8 +1,10 @@
-# StripBar
+# StripBar: IoT LED Strip realization of AnyBar
 
-Simple indicator for NeoPixel on Arduino inspired by [AnyBar](https://github.com/tonsky/AnyBar) (basically it is a clone of AnyBar)
+You want simple, beautiful LEDs on your desk so you can focus on the right work, instead of looking at the dreadful LCD screen? You want IoT in this smart-everything era? Look no more.
 
-Tested on Ubuntu 14.10 and Mac OS 10.10
+Introducing StripBar - Simple indicator for NeoPixel on Arduino inspired by [AnyBar](https://github.com/tonsky/AnyBar) (basically it is a clone of AnyBar)
+
+It is cross platform too, Tested on Ubuntu 14.10 and Mac OS 10.10. Should work on Windows, too.
 
 ## Install
 
@@ -49,5 +51,5 @@ Any color recognized by a webbrowser will work.
 
 If you have more than one LED, all the sockets will start listening from the base port (1738) and offset from there. 
 
-And one special command forces somebar to quit: `quit`
+And one special command forces stripbar to quit: `quit`
 
