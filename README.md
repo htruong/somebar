@@ -1,8 +1,10 @@
-# Stripbar: IoT LED Strip realization of AnyBar
+# Stripbar: Colorful dots for your computer
+
+Introducing Stripbar - Simple indicator for NeoPixel strips. 
 
 Stripbar is a small indicator for your computer that does one simple thing: it displays colored dots. What the dot means and when to change it is up to you.
 
-Introducing Stripbar - Simple indicator for NeoPixel on Arduino. Inspired by [AnyBar](https://github.com/tonsky/AnyBar). Beautifully made for you. With courage.
+Powered by Arduino. Inspired by [AnyBar](https://github.com/tonsky/AnyBar).
 
 ![LED strip](https://github.com/htruong/stripbar/raw/master/IMG_20161128_183947.jpg "LED strip")
 
