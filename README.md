@@ -4,6 +4,7 @@ You want simple, beautiful LEDs on your desk so you can focus on the right work,
 
 Introducing Stripbar - Simple indicator for NeoPixel on Arduino inspired by [AnyBar](https://github.com/tonsky/AnyBar).
 
+![LED strip](https://github.com/htruong/stripbar/raw/master/IMG_20161128_183947.jpg "LED strip")
 
 ## Compability
 
