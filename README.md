@@ -14,7 +14,7 @@ Powered by Arduino. Inspired by [AnyBar](https://github.com/tonsky/AnyBar). Work
 
 - 100% protocol-level compatibility with AnyBar, or your money back!
 
-- As far as I am concerned, this is the real deal, when it comes to color. You can tell it to display any color, unlike AnyBar.
+- I am convinced this is the real deal when it comes to colors. You can tell it to display any color, unlike AnyBar.
 
 ## Hardware
 
@@ -55,10 +55,10 @@ sudo python setup.py install
 Execute in console
 
 ```sh
-stripbar --serialdev /dev/ttyACM0 --numleds 9
+stripbar --serialdev /dev/ttyACM0 --numleds 9 -l 10
 ```
 
-You can set the brightness for the LED strip as well as the number of LEDs.
+You can set the brightness for the LED strip as well as the number of LEDs. -l (Luminance) value ranges from 0 (practically 1) to 255.
 
 For all options try
 
@@ -83,3 +83,10 @@ And one special command forces stripbar to quit: `quit`
 ```sh
 echo -n "quit" | nc -4u -w0 localhost 1738
 ```
+
+# Plugins
+
+Lots of plugins for AnyBar should work out of the box. Some of them I adapted to work specifically with Stripbar.
+
+- [With_stripbar](https://github.com/htruong/with_stripbar) with_anybar is ok except for the author wanted to start the Anybar process if it's not currently running. This is undesirable for cross-platform compability and makes it hard to swap anybar server. So I modified it to make it work with a generic server.
+
